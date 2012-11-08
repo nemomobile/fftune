@@ -1,3 +1,6 @@
+* Thu Nov 08 2012 Kalle Jokiniemi <kalle.jokiniemi@jollamobile.com> - 0.6
+- try to fix kernel-headers build dependecy
+
 * Thu Nov 08 2012 Kalle Jokiniemi <kalle.jokiniemi@jollamobile.com> - 0.5
 - Bumped version for build machinery
 
