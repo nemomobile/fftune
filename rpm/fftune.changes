@@ -1,3 +1,6 @@
+* Thu Nov 08 2012 Kalle Jokiniemi <kalle.jokiniemi@jollamobile.com> - 0.2
+- Bumped version for build machinery
+
 * Thu Nov 08 2012 Kalle Jokiniemi <kalle.jokiniemi@jollamobile.com> - 0.1
 - First release
 - Supports adding, listing, running, and stopping effects

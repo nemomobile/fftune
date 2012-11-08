@@ -1,6 +1,6 @@
 Name:       fftune
 Summary:    Command line tool for testing force feedback effects
-Version:    0.1
+Version:    0.2
 Release:    1
 Group:      Development/Tools/Other
 License:    GPL 2
