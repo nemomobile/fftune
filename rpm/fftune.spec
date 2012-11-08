@@ -6,7 +6,7 @@ Group:      Development/Tools/Other
 License:    GPL 2
 URL:        https://bitbucket.org/jolla/tools-fftune
 Source0:    %{name}-%{version}.tar.bz2
-BuildRequires:  pkgconfig(kernel-headers)
+BuildRequires:  kernel-headers
 
 %description
 fftune is a command line tool for creating and running force feedback effects
