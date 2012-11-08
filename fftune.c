@@ -177,7 +177,10 @@ static void play_effect(int id, int play)
 			perror("Stopping playback failed\n");
 		return;
 	}
-	printf("Playing effect %d\n", id);
+	if (play)
+		printf("Playing effect %d\n", id);
+	else
+		printf("Stopping effect %d\n", id);
 }
 
 static int32_t parse_int(char *token, int32_t max, int32_t min)
