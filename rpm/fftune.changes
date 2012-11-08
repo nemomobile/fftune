@@ -1,3 +1,6 @@
+* Thu Nov 08 2012 Kalle Jokiniemi <kalle.jokiniemi@jollamobile.com> - 0.7
+- Fixed install dir mismatch between OBS and Makefile
+
 * Thu Nov 08 2012 Kalle Jokiniemi <kalle.jokiniemi@jollamobile.com> - 0.6
 - try to fix kernel-headers build dependecy
 
