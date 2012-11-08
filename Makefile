@@ -27,7 +27,7 @@ PACKAGE := fftune-$(VERSION)
 
 CFLAGS		= -g -O2 -Wall -I../linux/include
 
-PREFIX          ?= /usr/local
+PREFIX          ?= /usr
 
 PROGRAMS	= fftune
 
