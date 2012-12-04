@@ -396,6 +396,46 @@ static int process_cmd(char *input)
 	return R_CONT;
 }
 
+static int test_interfaces(void)
+{
+	int result, i = 0;
+	int fp = 1;
+	char device_file_name[64];
+	unsigned long features[4];
+
+	printf("Testing for FF interface that supports FF_RUMBLE and ");
+	printf("FF_PERIODIC\n");
+	/* fail safe stop at 256 devices */
+	while (fp && i < 256) {
+		sprintf(device_file_name, "/dev/input/event%d", i);
+		printf("Opening %s\n", device_file_name);
+		fp = open(device_file_name, O_RDWR);
+		if (fp == -1) {
+			perror("test file open");
+			goto no_device;
+		}
+		/* Query device */
+		if (ioctl(fp, EVIOCGBIT(EV_FF, sizeof(unsigned long) * 4),
+								features) < 0) {
+			perror("Ioctl query failed");
+			goto next_iteration;
+		}
+		result = test_bit(FF_RUMBLE, features);
+		result = result && test_bit(FF_PERIODIC, features);
+		if (result) {
+			printf("Device %s supports FF_RUMBLE and FF_PERIODIC\n",
+							device_file_name);
+			return i;
+		}
+next_iteration:
+		i++;
+	}
+no_device:
+	printf("No support found for FF_PERIODIC and FF_RUMBLE effects in ");
+	printf("any device\n");
+	return -1;
+}
+
 int main(int argc, char** argv)
 {
 	struct input_event stop;
@@ -405,21 +445,31 @@ int main(int argc, char** argv)
 	unsigned long features[4];
 	int n_effects;	/* Number of effects the device can play at the same time */
 	int i;
+	int user_dev_node = 0;
 
 	printf("\nForce feedback effect tuning program\n\n");
 
-	strncpy(device_file_name, "/dev/input/event0", 64);
-
 	for (i=1; i<argc; ++i) {
 		if (strncmp(argv[i], "--help", 64) == 0) {
-			printf("Usage: %s /dev/input/eventXX\n", argv[0]);
-			printf("Tests the force feedback driver\n");
+			printf("Usage:\n");
+			printf("  %s /dev/input/eventXX   Open fftune with given driver\n", argv[0]);
+			printf("  %s -t                   Test for FF_RUMBLE and FF_PERIODIC\n", argv[0]);
 			exit(1);
+		} else if (strncmp(argv[i], "-t", 64) == 0) {
+			if (test_interfaces() >= 0)
+				exit(0);
+			else
+				exit(1);
 		}
 		else {
 			strncpy(device_file_name, argv[i], 64);
+			user_dev_node = 1;
 		}
 	}
+
+	if (!user_dev_node)
+		sprintf(device_file_name, "/dev/input/event%d",
+						test_interfaces());
 
 	/* Open device */
 	fftune.fd = open(device_file_name, O_RDWR);
