@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 # 02110-1301 USA.
 
-VERSION := 0.7
+VERSION := 0.8
 
 PACKAGE := fftune-$(VERSION)
 

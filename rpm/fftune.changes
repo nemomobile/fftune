@@ -1,3 +1,6 @@
+* Thu Dec 04 2012 Kalle Jokiniemi <kalle.jokiniemi@jollamobile.com> - 0.8
+- Added support for automatic device node detection and testing
+
 * Thu Nov 08 2012 Kalle Jokiniemi <kalle.jokiniemi@jollamobile.com> - 0.7
 - Fixed install dir mismatch between OBS and Makefile
 
